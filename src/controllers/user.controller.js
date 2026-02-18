@@ -15,6 +15,7 @@ const generateAccessAndAccessTokens = async(userId) =>{
 
         return {accessToken, refreshToken}
     } catch (error) {
+        console.error("Error generating tokens:", error);
         throw new ApiError(500, "Something went wrong while generating refresh and access token")
     }
 }
@@ -48,7 +49,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     const user = await User.create({
         fullName,
-        avatar: "https://placehold.co/200x200", // placeholder for now
+        avatar: "https://placehold.co/200x200", 
         email, 
         password,
         username: username.toLowerCase()
