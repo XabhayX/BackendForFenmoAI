@@ -64,10 +64,13 @@ const getExpenses = async (req, res) => {
         let sortOption = {};
         if (sort === 'date_desc') {
             sortOption.date = -1; // Newest first
+            sortOption.createdAt = -1; // Secondary sort: Newest created first
         } else if (sort === 'date_asc') {
              sortOption.date = 1;
+             sortOption.createdAt = 1; // Secondary sort: Oldest created first
         } else {
              sortOption.date = -1; // Default to newest first
+             sortOption.createdAt = -1;
         }
 
         const expenses = await Expense.find(query).sort(sortOption);
